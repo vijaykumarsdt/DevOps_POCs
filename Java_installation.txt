@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Check if Java is already installed
+if java -version; then
+  echo "Java is already installed"
+  exit 0
+fi
+
+# Download the latest Java Development Kit (JDK)
+wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/14.0.2+12/076bab302c7b4508975440c56f6cc26a/jdk-14.0.2_linux-x64_bin.tar.gz"
+
+# Extract the downloaded JDK
+tar -xzf jdk-14.0.2_linux-x64_bin.tar.gz
+
+# Set the JAVA_HOME environment variable
+export JAVA_HOME=$(pwd)/jdk-14.0.2
+
+# Add the JAVA_HOME variable to the profile file
+echo "export JAVA_HOME=$JAVA_HOME" >> ~/.profile
+
+# Add the JDK's bin directory to the PATH environment variable
+echo "export PATH=$JAVA_HOME/bin:$PATH" >> ~/.profile
+
+# Reload the profile file
+source ~/.profile
+
+# Verify the installation
+java -version
