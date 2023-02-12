@@ -14,7 +14,7 @@ provider "aws" {
 }
 
 # Create a EC2
-resource "aws_instance" "Test EC2" {
+resource "aws_instance" "jenkins-ec2" {
   ami                    = data.aws_ami.amzlinux.id
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.vpc-ssh.id, aws_security_group.vpc.web.id]
