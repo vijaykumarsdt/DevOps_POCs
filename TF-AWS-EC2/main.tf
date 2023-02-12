@@ -18,6 +18,10 @@ resource "aws_instance" "jenkins-ec2" {
   ami                    = data.aws_ami.amzlinux.id
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.vpc-ssh.id, aws_security_group.vpc.web.id]
+  user_data = <<-EOF
+                #!/bin/bash
+                echo "Hello, World!" > hello.txt
+              EOF
 
   tags = {
     "Name" = "Jenkins-Server"
